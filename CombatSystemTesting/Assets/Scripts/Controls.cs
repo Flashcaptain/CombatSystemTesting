@@ -23,6 +23,8 @@ public class Controls : MonoBehaviour
 
     public KeyCode _blockStanceKey;
     public KeyCode _sprintKey;
+    public KeyCode _attackKey;
+    public KeyCode _parryKey;
 
     [Range(0, 1)]
     public float _crosshairDeathzone;

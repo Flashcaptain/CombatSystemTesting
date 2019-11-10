@@ -32,6 +32,7 @@ public class CrosshairManager : MonoBehaviour
     private Image _bottom;
 
     private Image _image;
+    public bool _isLocked;
     public bool _isActive;
 
     private void Start()
@@ -84,6 +85,11 @@ public class CrosshairManager : MonoBehaviour
 
     private void FindDirection(float x, float y)
     {
+        if (_isLocked)
+        {
+            return;
+        }
+
         float largest = 0;
         _image.transform.localScale = Vector3.one;
         _image.color = Color.white;

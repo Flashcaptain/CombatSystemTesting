@@ -8,7 +8,7 @@ public class CombatBehavior : MonoBehaviour
     protected Actor _actor;
 
     [SerializeField]
-    protected Weapon _weapon;
+    public Weapon _weapon;
 
     [SerializeField]
     protected float _targetRange;

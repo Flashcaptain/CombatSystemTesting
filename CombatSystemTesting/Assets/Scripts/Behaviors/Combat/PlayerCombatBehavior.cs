@@ -26,7 +26,6 @@ public class PlayerCombatBehavior : CombatBehavior
     protected float _cameraMinAngle;
 
     private Weapon _currentWeapon;
-    private Enemy _currentTarget;
     float _cameraX;
 
     private void SwitchWeapon(Weapon weapon)
@@ -38,6 +37,22 @@ public class PlayerCombatBehavior : CombatBehavior
     }
 
     private void Update()
+    {
+        switch (_currentWeapon._weaponType)
+        {
+            case WeaponEnum.None:
+                return;
+            case WeaponEnum.Bow:
+                return;
+            case WeaponEnum.SwordAndShield:
+            case WeaponEnum.Light:
+            case WeaponEnum.Heavy:
+                MeleeManager();
+                return;
+        }
+    }
+
+    private void MeleeManager()
     {
         if (Input.GetKeyDown(Controls.Instance._blockStanceKey))
         {
@@ -56,6 +71,14 @@ public class PlayerCombatBehavior : CombatBehavior
         {
             LookAtTarget();
             _actor._blockEnum = _crosshairManager.GetBlockDirection(x, y, this.transform);
+            if (Input.GetKeyDown(Controls.Instance._attackKey))
+            {
+                _actor._attack.MeleeAttack(_currentWeapon, _crosshairManager);
+            }
+            if (Input.GetKeyDown(Controls.Instance._parryKey))
+            {
+                _actor._attack.ParryAttack(_currentWeapon, _crosshairManager);
+            }
         }
         else
         {
@@ -63,7 +86,7 @@ public class PlayerCombatBehavior : CombatBehavior
         }
     }
 
-    private void LookAround(float x, float y)
+        private void LookAround(float x, float y)
     {
         LerpCamera(_defaultCameraPosition, Controls.Instance._defaultCameraFOV);
         _cameraX += -y * Controls.Instance._mouseSensitivity * Time.deltaTime;
@@ -77,20 +100,20 @@ public class PlayerCombatBehavior : CombatBehavior
     {
         LerpCamera(_combatCameraPosition, Controls.Instance._combatCameraFOV);
 
-        if (_currentTarget == null)
+        if (_actor._currentTarget == null)
         {
             return;
         }
 
-        if (Vector3.Distance(_currentTarget.transform.position, _actor.transform.position) > _targetRange)
+        if (Vector3.Distance(_actor._currentTarget.transform.position, _actor.transform.position) > _targetRange)
         {
             _crosshairManager.ToggleState(false);
-            _currentTarget = null;
+            _actor._currentTarget = null;
             return;
         }
 
-        _combatCameraPosition.LookAt(_currentTarget.transform);
-        _actor.transform.LookAt(new Vector3(_currentTarget.transform.position.x, _actor.transform.position.y, _currentTarget.transform.position.z));
+        _combatCameraPosition.LookAt(_actor._currentTarget.transform);
+        _actor.transform.LookAt(new Vector3(_actor._currentTarget.transform.position.x, _actor.transform.position.y, _actor._currentTarget.transform.position.z));
     }
     
     private void LerpCamera(Transform transform, float FOV)
@@ -108,7 +131,7 @@ public class PlayerCombatBehavior : CombatBehavior
             Enemy enemy = hit.collider.GetComponent<Enemy>();
             if (enemy != null)
             {
-                _currentTarget = enemy;
+                _actor._currentTarget = enemy;
                 return;
             }
         }
@@ -122,7 +145,7 @@ public class PlayerCombatBehavior : CombatBehavior
             float dist = Vector3.Distance(enemy.transform.position, _actor.transform.position);
             if (dist < closest)
             {
-                _currentTarget = enemy;
+                _actor._currentTarget = enemy;
                 closest = dist;
             }
         }

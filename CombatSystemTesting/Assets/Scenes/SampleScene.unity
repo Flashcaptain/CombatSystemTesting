@@ -358,6 +358,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blockEnum: 0
+  _attack: {fileID: 0}
+  _animator: {fileID: 0}
+  _currentTarget: {fileID: 0}
+  _health: 0
   _combatBehavior: {fileID: 0}
   _movementBehavior: {fileID: 0}
 --- !u!135 &198127674
@@ -638,6 +642,8 @@ MonoBehaviour:
   _combatCameraFOV: 60
   _blockStanceKey: 306
   _sprintKey: 304
+  _attackKey: 0
+  _parryKey: 0
   _crosshairDeathzone: 0.5
   _mouseSensitivity: 150
 --- !u!4 &320101979
@@ -951,6 +957,7 @@ MonoBehaviour:
   _left: {fileID: 1929690667}
   _right: {fileID: 1440296657}
   _bottom: {fileID: 125206910}
+  _isLocked: 0
   _isActive: 0
 --- !u!1 &963194225
 GameObject:
@@ -1360,6 +1367,7 @@ MonoBehaviour:
   _left: {fileID: 1929690667}
   _right: {fileID: 1440296657}
   _bottom: {fileID: 125206910}
+  _isLocked: 0
   _isActive: 0
 --- !u!114 &1546048704
 MonoBehaviour:
@@ -1727,6 +1735,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blockEnum: 0
+  _attack: {fileID: 0}
+  _animator: {fileID: 0}
+  _currentTarget: {fileID: 0}
+  _health: 0
   _combatBehavior: {fileID: 0}
   _movementBehavior: {fileID: 0}
 --- !u!23 &1975213965
@@ -1814,6 +1826,7 @@ GameObject:
   - component: {fileID: 1984248696}
   - component: {fileID: 1984248700}
   - component: {fileID: 1984248699}
+  - component: {fileID: 1984248701}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1856,6 +1869,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blockEnum: 0
+  _attack: {fileID: 0}
+  _animator: {fileID: 0}
+  _currentTarget: {fileID: 0}
+  _health: 0
   _combatBehavior: {fileID: 1984248696}
   _movementBehavior: {fileID: 1984248700}
   _mainCamera: {fileID: 963194227}
@@ -1909,3 +1926,23 @@ MonoBehaviour:
   _deafaultSpeed: 3
   _sprintSpeed: 5
   _guardSpeed: 1
+--- !u!114 &1984248701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984248695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16dea05d9ea38ad438ce840975a72d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponType: 0
+  _attackSpeed: 0
+  _recoverySpeed: 0
+  _damage: 0
+  _range: 0
+  _canBlocksArrows: 1
+  _blockResistance: 5
+  _projectile: {fileID: 0}
