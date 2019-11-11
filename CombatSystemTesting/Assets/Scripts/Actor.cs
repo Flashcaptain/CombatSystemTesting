@@ -7,6 +7,8 @@ public class Actor : MonoBehaviour
     public BlockEnum _blockEnum;
     public AttackManager _attack;
     public Animator _animator;
+
+    [HideInInspector]
     public Actor _currentTarget = null;
 
     [SerializeField]
@@ -17,6 +19,17 @@ public class Actor : MonoBehaviour
 
     [SerializeField]
     protected MovementBehavior _movementBehavior;
+
+    private BlockEnum _lastblockEnum;
+
+    private void Update()
+    {
+        if (_lastblockEnum != _blockEnum)
+        {
+            _lastblockEnum = _blockEnum;
+            _animator.Play("Block" + _blockEnum);
+        }
+    }
 
     public void TakeDamage(float _damage, BlockEnum blockDirection)
     {

@@ -5,11 +5,14 @@ using UnityEngine;
 public class CombatBehavior : MonoBehaviour
 {
     [SerializeField]
-    protected Actor _actor;
-
-    [SerializeField]
     public Weapon _weapon;
 
     [SerializeField]
+    protected Actor _actor;
+
+    [SerializeField]
     protected float _targetRange;
+
+    [SerializeField]
+    protected CrosshairManager _crosshairManager;
 }

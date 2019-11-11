@@ -5,9 +5,6 @@ using UnityEngine;
 public class PlayerCombatBehavior : CombatBehavior
 {
     [SerializeField]
-    protected CrosshairManager _crosshairManager;
-
-    [SerializeField]
     protected Transform _cameraHolder;
 
     [SerializeField]
@@ -25,28 +22,26 @@ public class PlayerCombatBehavior : CombatBehavior
     [SerializeField]
     protected float _cameraMinAngle;
 
-    private Weapon _currentWeapon;
     float _cameraX;
 
     private void SwitchWeapon(Weapon weapon)
     {
         if (_actor._blockEnum == BlockEnum.None)
         {
-            _currentWeapon = weapon;
+            _weapon = weapon;
+            _actor._animator.SetFloat("Speed", weapon._attackSpeed);
         }
     }
 
     private void Update()
     {
-        switch (_currentWeapon._weaponType)
+        switch (_weapon._weaponType)
         {
             case WeaponEnum.None:
                 return;
-            case WeaponEnum.Bow:
+            case WeaponEnum.Ranged:
                 return;
-            case WeaponEnum.SwordAndShield:
-            case WeaponEnum.Light:
-            case WeaponEnum.Heavy:
+            case WeaponEnum.Melee:
                 MeleeManager();
                 return;
         }
@@ -62,6 +57,8 @@ public class PlayerCombatBehavior : CombatBehavior
         if (Input.GetKeyUp(Controls.Instance._blockStanceKey))
         {
             _crosshairManager.ToggleState(false);
+            _actor._blockEnum = BlockEnum.None;
+
         }
 
         float x = Input.GetAxis(Controls.Instance._lookAxisX);
@@ -73,11 +70,7 @@ public class PlayerCombatBehavior : CombatBehavior
             _actor._blockEnum = _crosshairManager.GetBlockDirection(x, y, this.transform);
             if (Input.GetKeyDown(Controls.Instance._attackKey))
             {
-                _actor._attack.MeleeAttack(_currentWeapon, _crosshairManager);
-            }
-            if (Input.GetKeyDown(Controls.Instance._parryKey))
-            {
-                _actor._attack.ParryAttack(_currentWeapon, _crosshairManager);
+                _actor._attack.MeleeAttack(_weapon, _crosshairManager);
             }
         }
         else

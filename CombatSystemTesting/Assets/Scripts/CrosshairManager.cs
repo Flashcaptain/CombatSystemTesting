@@ -6,6 +6,10 @@ public class CrosshairManager : MonoBehaviour
 {
     [HideInInspector]
     public BlockEnum _blockEnum = BlockEnum.Bottom;
+    [HideInInspector]
+    public bool _isLocked;
+    [HideInInspector]
+    public bool _isActive;
 
     [Header("settings")]
 
@@ -16,8 +20,6 @@ public class CrosshairManager : MonoBehaviour
     [SerializeField]
     private float _selectedIncreaseSize;
 
-    [SerializeField]
-    private GameObject _passive;
     [SerializeField]
     private GameObject _backGround;
     [SerializeField]
@@ -32,8 +34,6 @@ public class CrosshairManager : MonoBehaviour
     private Image _bottom;
 
     private Image _image;
-    public bool _isLocked;
-    public bool _isActive;
 
     private void Start()
     {
@@ -42,9 +42,27 @@ public class CrosshairManager : MonoBehaviour
         ToggleState(false);
     }
 
+    public void CollorIndicator(BlockEnum blockEnum)
+    {
+        switch (blockEnum)
+        {
+            case BlockEnum.None:
+                _image.color = Controls.Instance._blockColor;
+                return;
+            case BlockEnum.Top:
+            case BlockEnum.Left:
+            case BlockEnum.Right:
+                _image.color = Controls.Instance._attackColor;
+                return;
+            case BlockEnum.Bottom:
+                _image.color = Controls.Instance._bashColor;
+                return;
+
+        }
+    }
+
     public void ToggleState(bool state)
     {
-        _passive.SetActive(!state);
         _backGround.SetActive(state);
         _isActive = state;
 

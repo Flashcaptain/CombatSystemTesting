@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
     public WeaponEnum _weaponType;
+    public AnimatorController _attackAnimatorController;
 
     public float _attackSpeed;
-    public float _recoverySpeed;
+    public float _recoveryTime;
 
     [Header("Melee")]
     public float _damage;
