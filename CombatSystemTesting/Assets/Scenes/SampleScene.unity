@@ -1417,7 +1417,7 @@ PrefabInstance:
     - target: {fileID: 7918717904170024832, guid: a473ca515aabf1a449fe1d292b430d08,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7918717904170024832, guid: a473ca515aabf1a449fe1d292b430d08,
         type: 3}
@@ -1427,7 +1427,7 @@ PrefabInstance:
     - target: {fileID: 7918717904170024832, guid: a473ca515aabf1a449fe1d292b430d08,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7918717904170024832, guid: a473ca515aabf1a449fe1d292b430d08,
         type: 3}
@@ -1442,7 +1442,7 @@ PrefabInstance:
     - target: {fileID: 7918717904170024832, guid: a473ca515aabf1a449fe1d292b430d08,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 7918717904170024832, guid: a473ca515aabf1a449fe1d292b430d08,
         type: 3}
@@ -1743,7 +1743,7 @@ MonoBehaviour:
   _blockChance: 50
   _attackChance: 35
   _bashChance: 5
-  _reactionTime: 1.5
+  _reactionTime: 1.2
 --- !u!95 &1975213971
 Animator:
   serializedVersion: 3
